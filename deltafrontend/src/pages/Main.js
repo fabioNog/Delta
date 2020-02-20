@@ -12,12 +12,13 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import Add from '@material-ui/icons/Add';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 
+import {Link} from "react-router-dom";
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
@@ -94,6 +95,13 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
+  const handleClickList = (text) =>{
+    const t = text.toLowerCase();
+    console.log(t);
+    
+    
+  }
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -143,8 +151,8 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['Adicionar', 'Deletar', 'Atualizar','Listar'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItem button key={text} component={Link} to={text}>
+              <ListItemIcon>{index % 2 === 0 ? <Add /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
