@@ -128,7 +128,6 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="white"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
