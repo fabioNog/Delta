@@ -13,17 +13,22 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Add from '@material-ui/icons/Add';
+import Autorenew from '@material-ui/icons/Autorenew';
+import Delete from '@material-ui/icons/Delete';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 
+//Import Link 
 import {Link} from "react-router-dom";
+
+//import Tabela que listara
+import Table from '../components/Tabela'
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
+    display: 'flex',    
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -31,25 +36,28 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    background: 'black'
   },
   appBarShift: {
     marginLeft: drawerWidth,
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen,      
+    }),        
   },
   menuButton: {
     marginRight: 36,
+    backgroundColor: 'white'
   },
   hide: {
     display: 'none',
+    background:'white'
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap',        
   },
   drawerOpen: {
     width: drawerWidth,
@@ -57,6 +65,7 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    
   },
   drawerClose: {
     transition: theme.transitions.create('width', {
@@ -95,11 +104,17 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  const handleClickList = (text) =>{
-    const t = text.toLowerCase();
-    console.log(t);
-    
-    
+  const renderSwitch = (param) => {
+    switch(param) {
+      case 3:
+        return <Add/>;
+      case 1:
+      return <Delete/>;
+      case 2:
+        return <Autorenew/>;
+      default:
+        return <Add/>;
+    }
   }
 
   return (
@@ -113,7 +128,7 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="inherit"
+            color="white"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -123,9 +138,11 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
+          <Link to="/" style={{textDecoration: 'none',color:'white'}}>
+            <Typography variant="h4" noWrap>
+              Delta Inova
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -150,9 +167,11 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Adicionar', 'Deletar', 'Atualizar','Listar'].map((text, index) => (
+          {['Adicionar', 'Deletar', 'Atualizar'].map((text, index) => (
             <ListItem button key={text} component={Link} to={text}>
-              <ListItemIcon>{index % 2 === 0 ? <Add /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+              {renderSwitch(index)}                                
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -160,7 +179,7 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-
+            <Table/>
       </main>
     </div>
   );
