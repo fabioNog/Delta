@@ -28,7 +28,7 @@ class aluno_model extends CI_Model {
     }
 
     function update_aluno($aluno_id, $aluno_nome, $aluno_url) {
-        $data = array('nome' => $aluno_nome, 'url' => $aluno_url);
+        $data = array('nome' => $aluno_nome);
         $this->db->where('id', $aluno_id);
         $this->db->update($this->aluno, $data);
     }
