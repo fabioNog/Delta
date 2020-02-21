@@ -25,7 +25,7 @@
       }
     //API call - get all alunos record
     public function getallalunos(){   
-        $this->db->select('id, name');
+        $this->db->select('a_nome, a_nome');
         $this->db->from('aluno');
         $this->db->order_by("id", "desc"); 
         $query = $this->db->get();
