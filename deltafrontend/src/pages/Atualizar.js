@@ -22,6 +22,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 //Import Link 
 import {Link} from "react-router-dom";
 
+//Import Formulario
+import Formulario from '../components/FormularioEditar'
 
 const drawerWidth = 240;
 
@@ -89,7 +91,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MiniDrawer() {
+export default function Atualizar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -177,6 +179,7 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Formulario/>
       </main>
     </div>
   );

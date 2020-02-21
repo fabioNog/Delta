@@ -23,7 +23,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import {Link} from "react-router-dom";
 
 //Import Formulario
-import Formulario from '../components/Formulario'
+import Formulario from '../components/FormularioCriar'
 
 
 const drawerWidth = 240;

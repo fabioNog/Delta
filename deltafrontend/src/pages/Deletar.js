@@ -22,6 +22,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 //Import Link 
 import {Link} from "react-router-dom";
 
+//Import Formulario
+import Deletar from '../components/Deletar'
 
 const drawerWidth = 240;
 
@@ -177,6 +179,7 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Deletar/>
       </main>
     </div>
   );

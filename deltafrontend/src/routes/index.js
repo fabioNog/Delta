@@ -8,7 +8,7 @@ import {
 
 //Imports das minhas paginas
 import Main from "../pages/Main";
-import Adicionar from "../pages/Adionar";
+import Adicionar from "../pages/Adicionar";
 import Deletar from "../pages/Deletar";
 import Atualizar from "../pages/Atualizar";
 
