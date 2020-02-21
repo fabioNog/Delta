@@ -9,6 +9,9 @@ import {
 //Imports das minhas paginas
 import Main from "../pages/Main";
 import Adicionar from "../pages/Adionar";
+import Deletar from "../pages/Deletar";
+import Atualizar from "../pages/Atualizar";
+
 
 
 const Routes = () => (
@@ -16,6 +19,8 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" component={Main} />
             <Route path="/adicionar" component={Adicionar} />
+            <Route path="/deletar" component={Deletar} />
+            <Route path="/atualizar" component={Atualizar} />
         </Switch>
     </Router>
 );
