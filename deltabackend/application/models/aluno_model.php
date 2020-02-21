@@ -1,41 +1,67 @@
 <?php
-
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class aluno_model extends CI_Model {
-
-    private $aluno = 'aluno';
-	
-    function get_aluno_list() {
-        $query = $this->db->get($this->aluno);
-        if ($query) {
-            return $query->result();
+  class Aluno_model extends CI_Model {
+       
+      public function __construct(){
+          
+        $this->load->database();
+        
+      }
+      
+      //API call - get a aluno record by nome
+      public function getalunobynome($nome){  
+           $this->db->select('a_nome, a_nome');
+           $this->db->from('aluno');
+           $this->db->where('a_nome',$nome);
+           $query = $this->db->get();
+           
+           if($query->num_rows() == 1)
+           {
+               return $query->result_array();
+           }
+           else
+           {
+             return 0;
+          }
+      }
+    //API call - get all alunos record
+    public function getallalunos(){   
+        $this->db->select('id, name');
+        $this->db->from('aluno');
+        $this->db->order_by("id", "desc"); 
+        $query = $this->db->get();
+        if($query->num_rows() > 0){
+          return $query->result_array();
+        }else{
+          return 0;
         }
-        return NULL;
     }
-
-    function get_aluno($id) {
-        $query = $this->db->get_where($this->aluno, array("id" => $id));
-        if ($query) {
-            return $query->row();
+   
+   //API call - delete a Aluno record
+    public function delete($id){
+       $this->db->where('id', $id);
+       if($this->db->delete('aluno')){
+          return true;
+        }else{
+          return false;
         }
-        return NULL;
+   }
+   
+   //API call - add new Aluno record
+    public function add($data){
+        if($this->db->insert('aluno', $data)){
+           return true;
+        }else{
+           return false;
+        }
     }
-	
-    function add_aluno($aluno_nome, $aluno_url) {
-        $data = array('nome' => $aluno_nome);
-        $this->db->insert($this->aluno, $data);
+    
+    //API call - update a Aluno record
+    public function update($id, $data){
+       $this->db->where('id', $id);
+       if($this->db->update('aluno', $data)){
+          return true;
+        }else{
+          return false;
+        }
     }
-
-    function update_aluno($aluno_id, $aluno_nome, $aluno_url) {
-        $data = array('nome' => $aluno_nome);
-        $this->db->where('id', $aluno_id);
-        $this->db->update($this->aluno, $data);
-    }
-	
-    function delete_aluno($aluno_id) {
-        $this->db->where('id', $aluno_id);
-        $this->db->delete($this->aluno);
-    }
-
 }
