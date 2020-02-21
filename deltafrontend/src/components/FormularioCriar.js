@@ -7,7 +7,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+//Import Component Avatar
 
+import Avatar from './Avatar'
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -43,11 +45,11 @@ export default function Cadastrar() {
             <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
-                name="nome"
+                name="a_nome"
                 variant="outlined"
                 required
                 fullWidth
-                id="nome"
+                id="a_nome"
                 label="Nome"
                 autoFocus
               />
@@ -57,22 +59,75 @@ export default function Cadastrar() {
                 variant="outlined"
                 required
                 fullWidth
-                id="sobrenome"
-                label="Sobrenome"
-                name="sobrenome"
-                autoComplete="lname"
+                label="Codigo do Aluno"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                id="end_aluno"
+                name="end_aluno"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
                 required
                 fullWidth
-                id="endereco"
-                label="Endereço"
-                name="endereco"
-                autoComplete="endereço"
+                label="Numero da casa"
+                type="number"
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                id="numero"
+                name="numero"
               />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="end_rua"
+                variant="outlined"
+                required
+                fullWidth
+                id="end_rua"
+                label="Rua"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="end_bairro"
+                variant="outlined"
+                required
+                fullWidth
+                id="end_bairro"
+                label="Bairro"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="end_cidade"
+                variant="outlined"
+                required
+                fullWidth
+                id="end_cidade"
+                label="Cidade"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                name="end_cep"
+                variant="outlined"
+                required
+                fullWidth
+                id="end_cep"
+                label="Cep"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Avatar />
             </Grid>
           </Grid>
           <Button
@@ -82,7 +137,7 @@ export default function Cadastrar() {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            Cadastrar
           </Button>
         </form>
       </div>
