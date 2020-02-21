@@ -48,7 +48,6 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: 36,
-    backgroundColor: 'white'
   },
   hide: {
     display: 'none',
@@ -128,6 +127,7 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
+            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -159,7 +159,7 @@ export default function MiniDrawer() {
       >
         <div className={classes.toolbar}>
 
-         <h3>Delta Inova</h3>
+         <h2>Delta</h2>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>

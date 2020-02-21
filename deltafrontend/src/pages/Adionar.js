@@ -22,6 +22,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 //Import Link 
 import {Link} from "react-router-dom";
 
+//Import Formulario
+import Formulario from '../components/Formulario'
+
 
 const drawerWidth = 240;
 
@@ -47,7 +50,6 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: 36,
-    backgroundColor: 'white'
   },
   hide: {
     display: 'none',
@@ -127,7 +129,7 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="white"
+            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
@@ -178,6 +180,7 @@ export default function MiniDrawer() {
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
+        <Formulario/>
       </main>
     </div>
   );

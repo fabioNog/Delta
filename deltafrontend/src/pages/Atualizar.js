@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: 36,
-    backgroundColor: 'white'
   },
   hide: {
     display: 'none',
@@ -127,7 +126,7 @@ export default function MiniDrawer() {
       >
         <Toolbar>
           <IconButton
-            color="white"
+            color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
