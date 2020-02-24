@@ -11,6 +11,7 @@ import Main from "../pages/Main";
 import Adicionar from "../pages/Adicionar";
 import Deletar from "../pages/Deletar";
 import Atualizar from "../pages/Atualizar";
+import InfoEndereco from "../pages/InfoEndereco";
 
 
 
@@ -21,6 +22,7 @@ const Routes = () => (
             <Route path="/adicionar" component={Adicionar} />
             <Route path="/deletar" component={Deletar} />
             <Route path="/atualizar" component={Atualizar} />
+            <Route path="/infoendereco" component={InfoEndereco} />
         </Switch>
     </Router>
 );
