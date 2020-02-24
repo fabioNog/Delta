@@ -7,6 +7,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import Autorenew from '@material-ui/icons/Autorenew';
+import Delete from '@material-ui/icons/Delete';
+import {Link} from "react-router-dom";
 
 //Importando Axios
 import axios from 'axios';
@@ -32,14 +36,6 @@ const StyledTableRow = withStyles(theme => ({
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Eclair', 262, 16.0),
-  createData('Cupcake', 305, 3.7),
-  createData('Gingerbread', 356, 16.0)
-];
 
 const useStyles = makeStyles({
   table: {
@@ -67,6 +63,8 @@ export default function CustomizedTables() {
             <StyledTableCell>Nome</StyledTableCell>
             <StyledTableCell>Endereço</StyledTableCell>
             <StyledTableCell>Foto</StyledTableCell>            
+            <StyledTableCell>Atualizar</StyledTableCell>
+            <StyledTableCell>Deletar</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -77,6 +75,20 @@ export default function CustomizedTables() {
               </StyledTableCell>
               <StyledTableCell>{row.calories}</StyledTableCell>
               <StyledTableCell>{row.fat}</StyledTableCell>
+              <StyledTableCell>
+                <Link to={"/atualizar"}>
+                  <ListItemIcon >
+                    {<Autorenew/>}                                
+                  </ListItemIcon>
+                </Link>
+              </StyledTableCell>
+              <StyledTableCell>
+                <Link to={"/deletar"}>
+                  <ListItemIcon>
+                    {<Delete/>}                                
+                  </ListItemIcon>
+                </Link>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

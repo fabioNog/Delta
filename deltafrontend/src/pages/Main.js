@@ -107,10 +107,6 @@ export default function MiniDrawer() {
     switch(param) {
       case 3:
         return <Add/>;
-      case 1:
-      return <Delete/>;
-      case 2:
-        return <Autorenew/>;
       default:
         return <Add/>;
     }
@@ -166,7 +162,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['Adicionar', 'Deletar', 'Atualizar'].map((text, index) => (
+          {['Adicionar'].map((text, index) => (
             <ListItem button key={text} component={Link} to={text}>
               <ListItemIcon>
               {renderSwitch(index)}                                

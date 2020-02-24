@@ -109,10 +109,6 @@ export default function MiniDrawer() {
     switch(param) {
       case 3:
         return <Add/>;
-      case 1:
-      return <Delete/>;
-      case 2:
-        return <Autorenew/>;
       default:
         return <Add/>;
     }
@@ -146,38 +142,6 @@ export default function MiniDrawer() {
           </Link>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-      >
-        <div className={classes.toolbar}>
-
-         <h3>Delta Inova</h3>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Adicionar', 'Deletar', 'Atualizar'].map((text, index) => (
-            <ListItem button key={text} component={Link} to={text}>
-              <ListItemIcon>
-              {renderSwitch(index)}                                
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Formulario/>
