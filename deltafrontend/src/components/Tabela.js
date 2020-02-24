@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Autorenew from '@material-ui/icons/Autorenew';
 import Delete from '@material-ui/icons/Delete';
+import House from '@material-ui/icons/House';
 import {Link} from "react-router-dom";
 
 //Importando Axios
@@ -73,7 +74,13 @@ export default function CustomizedTables() {
               <StyledTableCell component="th" scope="row">
                 {row.a_nome}
               </StyledTableCell>
-              <StyledTableCell>{row.calories}</StyledTableCell>
+              <StyledTableCell>
+                <Link to={"/infoendereco"}>
+                  <ListItemIcon>
+                    {<House/>}                                
+                  </ListItemIcon>
+                </Link>
+              </StyledTableCell>
               <StyledTableCell>{row.fat}</StyledTableCell>
               <StyledTableCell>
                 <Link to={"/atualizar"}>
