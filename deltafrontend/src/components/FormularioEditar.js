@@ -9,7 +9,7 @@ import Container from '@material-ui/core/Container';
 
 //Importando axios
 
-import axios from 'axios';
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -32,7 +32,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Editar() {
   const classes = useStyles();
-
 
   return (
     <Container component="main" maxWidth="xs">
