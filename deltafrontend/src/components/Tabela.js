@@ -12,7 +12,7 @@ import Autorenew from '@material-ui/icons/Autorenew';
 import Delete from '@material-ui/icons/Delete';
 import House from '@material-ui/icons/House';
 import {Link} from "react-router-dom";
-
+import Avatar from '@material-ui/core/Avatar';
 //Importando Axios
 import axios from 'axios';
 
@@ -69,19 +69,24 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(row => (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">
-                {row.a_nome}
+          {data.map(aluno => (
+            <StyledTableRow key={aluno.id}>
+              <StyledTableCell>
+                {aluno.a_nome}
               </StyledTableCell>
               <StyledTableCell>
-                <Link to={"/infoendereco"}>
+                <Link to={`/infoendereco/${aluno.id}`}>
                   <ListItemIcon>
                     {<House/>}                                
                   </ListItemIcon>
                 </Link>
               </StyledTableCell>
-              <StyledTableCell>{row.fat}</StyledTableCell>
+              <StyledTableCell>
+                <Avatar
+                  variant={'circle'}          
+                  className={classes.input}
+                  src={aluno.image}
+                /></StyledTableCell>
               <StyledTableCell>
                 <Link to={"/atualizar"}>
                   <ListItemIcon >
