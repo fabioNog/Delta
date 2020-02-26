@@ -46,6 +46,7 @@ export default function Cadastrar() {
   //States do Aluno
   const [a_nome, setAnome] = useState('');
   const [image, setImage] = useState('');
+  const [file, setFile] = useState('null');
   
   //States do Endereco
   const [end_aluno, setEndAluno] = useState(0);
@@ -59,6 +60,7 @@ export default function Cadastrar() {
   //Metodo upload Input
   const upload = e =>{
     let files = e.target.files[0]
+    setFile(URL.createObjectURL(files))
     let reader = new FileReader();
     reader.readAsDataURL(files);
     reader.onload = (e) => {              
@@ -216,8 +218,9 @@ export default function Cadastrar() {
             </Grid>
             <Grid item xs={12} sm={2}>
               <Avatar
-                variant={'rounded'}          
+                variant={'circle'}          
                 className={classes.input}
+                src={file}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
