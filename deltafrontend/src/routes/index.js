@@ -22,7 +22,7 @@ const Routes = () => (
             <Route path="/adicionar" component={Adicionar} />
             <Route path="/deletar" component={Deletar} />
             <Route path="/atualizar" component={Atualizar} />
-            <Route path="/infoendereco" component={InfoEndereco} />
+            <Route path="/infoendereco/:id" component={InfoEndereco} />
         </Switch>
     </Router>
 );
