@@ -20,8 +20,8 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" component={Main} />
             <Route path="/adicionar" component={Adicionar} />
-            <Route path="/deletar" component={Deletar} />
-            <Route path="/atualizar" component={Atualizar} />
+            <Route path="/deletar/:id" component={Deletar} />
+            <Route path="/atualizar/:id" component={Atualizar} />
             <Route path="/infoendereco/:id" component={InfoEndereco} />
         </Switch>
     </Router>
