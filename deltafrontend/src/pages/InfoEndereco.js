@@ -18,7 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 //Import Link 
-import {Link} from "react-router-dom";
+import {Link,useParams} from "react-router-dom";
 
 //import Tabela que listara
 import Endereco from '../components/Endereco'
@@ -88,18 +88,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MiniDrawer() {
+export default function InfoEndereço({match}) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  let id = useParams()
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const renderSwitch = (param) => {
     switch(param) {
@@ -115,9 +108,7 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
+        className={clsx(classes.appBar)}
       >
         <Toolbar>
           <Link to="/" style={{textDecoration: 'none',color:'white'}}>
@@ -129,7 +120,7 @@ export default function MiniDrawer() {
       </AppBar>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-            <Endereco/>
+            <Endereco number={id}/>
       </main>
     </div>
   );
