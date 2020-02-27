@@ -36,17 +36,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomizedTables() {
+export default function CustomizedTables(id) {
   const classes = useStyles();
-
+  
   const [data, setData] = useState([]);
-    useEffect(()=>{
-        axios.get('http://localhost/delta/deltabackend/index.php/api/aluno', function(req, res, next){
-            return res.sendStatus(200);
-         })
-        .then(res => setData(res.data))
-        .catch(res => console.log('erro'))
-    },[])
+  
+  useEffect(() =>{             
+    axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id.number.id}`, function(req, res, next){
+        return res.sendStatus(200);
+     })
+    .then(res => setData(res.data))
+    .catch(res => console.log('erro'))
+  },[])
 
   return (
     <TableContainer component={Paper}>
@@ -58,6 +59,7 @@ export default function CustomizedTables() {
             <StyledTableCell>Rua</StyledTableCell>            
             <StyledTableCell>Bairro</StyledTableCell>
             <StyledTableCell>Cidade</StyledTableCell>
+            <StyledTableCell>Estado</StyledTableCell>
             <StyledTableCell>Cep</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -69,6 +71,7 @@ export default function CustomizedTables() {
               <StyledTableCell>{row.end_rua}</StyledTableCell>
               <StyledTableCell>{row.end_bairro}</StyledTableCell>
               <StyledTableCell>{row.end_cidade}</StyledTableCell>
+              <StyledTableCell>{row.end_estado}</StyledTableCell>
               <StyledTableCell>{row.end_cep}</StyledTableCell>
             </StyledTableRow>
           ))}
