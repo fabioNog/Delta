@@ -16,10 +16,9 @@ class Api extends REST_Controller{
         parent::__construct();
 
         $this->load->model('aluno_model');
-        $this->load->model('endereco_model');
     }
 
-    //API - client sends id and on valid isbn aluno information is sent back
+    //API - client sends id and on valid nome aluno information is sent back
     function alunoByNome_get(){
         $nome  = $this->get('a_nome');        
         if(!$nome){
@@ -39,9 +38,43 @@ class Api extends REST_Controller{
         }
     } 
 
+    //API - client sends id and on valid id aluno information is sent back
+    function alunoById_get(){
+        $id  = $this->get('id');        
+        if(!$id){
+            $this->response("No Id specified", 400);
+            exit;
+        }
+
+        $result = $this->aluno_model->getalunobyid($id);
+
+        if($result){
+            $this->response($result, 200); 
+            exit;
+        } 
+        else{
+             $this->response("Invalid ID", 404);
+            exit;
+        }
+    }
+
     //API -  Fetch All Alunos
     function aluno_get(){
         $result = $this->aluno_model->getallalunos();
+
+        if($result){
+            $this->response($result, 200); 
+        } 
+
+        else{
+
+            $this->response("No record found", 404);
+
+        }
+    }
+
+    function aluno_id_get(){
+        $result = $this->aluno_model->getallalunosid();
 
         if($result){
             $this->response($result, 200); 
@@ -61,26 +94,28 @@ class Api extends REST_Controller{
          $image = $this->post('image');
         
         //Endereco
-        $end_aluno = $this->post('end_aluno');
         $end_num = $this->post('end_num');
         $end_rua = $this->post('end_rua');
         $end_bairro = $this->post('end_bairro');
         $end_cidade = $this->post('end_cidade');
+        $end_estado = $this->post('end_estado');
         $end_cep = $this->post('end_cep');
 
-        if(!$nome || !$image || !$end_aluno || !$end_num || !$end_rua || !$end_bairro || !$end_cidade || !$end_cep){
+        if(!$nome || !$image || !$end_num || !$end_rua || !$end_bairro || !$end_cidade || !$end_estado || !$end_cep){
         $this->response("Enter complete aluno information to save no banco", 400);
         }
          else{
-            $aluno = $this->aluno_model->add(array("a_nome"=>$nome,"image"=>$image));
-            $endereco = $this->endereco_model->add(array(
-            "end_aluno"=>$end_aluno,
+            $aluno = $this->aluno_model->add(array(
+            "a_nome"=>$nome,
+            "image"=>$image,
             "end_num"=>$end_num,
             "end_rua"=>$end_rua,
             "end_bairro"=>$end_bairro,
             "end_cidade"=>$end_cidade,
+            "end_estado"=>$end_estado,
             "end_cep"=>$end_cep));
-            if($aluno === 0 && $endereco){
+
+            if($aluno === 0){
                 $this->response("Aluno information coild not be saved. Try again.", 404);
             }else{
                 $this->response("success", 200);             
