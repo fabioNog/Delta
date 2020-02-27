@@ -88,14 +88,14 @@ export default function CustomizedTables() {
                   src={aluno.image}
                 /></StyledTableCell>
               <StyledTableCell>
-                <Link to={"/atualizar"}>
+                <Link to={`/atualizar/${aluno.id}`}>
                   <ListItemIcon >
                     {<Autorenew/>}                                
                   </ListItemIcon>
                 </Link>
               </StyledTableCell>
               <StyledTableCell>
-                <Link to={"/deletar"}>
+                <Link to={`/deletar/${aluno.id}`}>
                   <ListItemIcon>
                     {<Delete/>}                                
                   </ListItemIcon>
