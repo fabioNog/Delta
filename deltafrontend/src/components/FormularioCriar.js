@@ -6,10 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import MenuItem from '@material-ui/core/MenuItem';
 
 //Axios import
 import axios from 'axios';
-import qs  from 'qs'
+import qs from 'qs'
 import Avatar from '@material-ui/core/Avatar';
 
 
@@ -40,85 +41,167 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const currencies = [
+  {
+    end_estado: 'ac',
+  },
+  {
+    end_estado: 'al',
+  },
+  {
+    end_estado: 'ap',
+  },
+  {
+    end_estado: 'am',
+  },
+  {
+    end_estado: 'ba',
+  },
+  {
+    end_estado: 'ce',
+  },
+  {
+    end_estado: 'df',
+  },
+  {
+    end_estado: 'es',
+  },
+  {
+    end_estado: 'go',
+  },
+  {
+    end_estado: 'ma',
+  },
+  {
+    end_estado: 'mg',
+  },
+  {
+    end_estado: 'ms',
+  },
+  {
+    end_estado: 'pa',
+  },
+  {
+    end_estado: 'pb',
+  },
+  {
+    end_estado: 'pr',
+  },
+  {
+    end_estado: 'pe',
+  },
+  {
+    end_estado: 'pi',
+  },
+  {
+    end_estado: 'rj',
+  },
+  {
+    end_estado: 'rn',
+  },
+  {
+    end_estado: 'rs',
+  },
+  {
+    end_estado: 'ro',
+  },
+  {
+    end_estado: 'rr',
+  },
+  {
+    end_estado: 'sc',
+  },
+  {
+    end_estado: 'sp',
+  },
+  {
+    end_estado: 'se',
+  },
+  {
+    end_estado: 'to',
+  },
+];
+
 export default function Cadastrar() {
-  const classes = useStyles();
+  const classes = useStyles();  
 
   //States do Aluno
   const [a_nome, setAnome] = useState('');
   const [image, setImage] = useState('');
   const [file, setFile] = useState('null');
-  
+
   //States do Endereco
-  const [end_aluno, setEndAluno] = useState(0);
   const [end_num, setEndNum] = useState(0);
   const [end_rua, setEndRua] = useState('');
   const [end_bairro, setEndBairro] = useState('');
   const [end_cidade, setEndCidade] = useState('');
+  const [end_estado, setEndEstado] = useState('');
   const [end_cep, setEndCep] = useState('');
-  
-  
+
+
   //Metodo upload Input
-  const upload = e =>{
+  const upload = e => {
     let files = e.target.files[0]
     setFile(URL.createObjectURL(files))
     let reader = new FileReader();
     reader.readAsDataURL(files);
-    reader.onload = (e) => {              
-        setImage(e.target.result)
+    reader.onload = (e) => {
+      setImage(e.target.result)
     }
   }
 
-  const handleNome = (e) =>{
+  const handleNome = (e) => {
     return setAnome(e.target.value)
   }
 
-  const handleEndAluno = (e) =>{
-    return setEndAluno(e.target.value)
-  }
-
-  const handleEndNum = (e) =>{
+  const handleEndNum = (e) => {
     return setEndNum(e.target.value)
   }
 
-  const handleEndRua = (e) =>{
+  const handleEndRua = (e) => {
     return setEndRua(e.target.value)
   }
 
-  const handleEndBairro = (e) =>{
+  const handleEndBairro = (e) => {
     return setEndBairro(e.target.value)
   }
-  
-  const handleEndCidade = (e) =>{
+
+  const handleEndCidade = (e) => {
     return setEndCidade(e.target.value)
   }
-  const handleEndCep = (e) =>{
+
+  const handleEndEstado = (e) => {
+    return setEndEstado(e.target.value)
+  }
+
+  const handleEndCep = (e) => {
     return setEndCep(e.target.value)
   }
 
   const OnSubmit = (e) => {
-    e.preventDefault();    
-    const teste = {a_nome,image,end_aluno,end_num,end_rua,end_bairro,end_cidade,end_cep}
+    e.preventDefault();
+    const teste = { a_nome, image, end_num, end_rua, end_bairro, end_cidade, end_estado,end_cep }
     const QS = qs.stringify(teste)
     console.log(QS)
     const url = 'http://localhost/delta/deltabackend/index.php/api/addAluno'
     const config = {
-     headers: {
-       'Content-Type': 'application/x-www-form-urlencoded'
-     }
-   }
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
     axios.post(url, QS, config)
-   .then(function (response) {
-     console.log(response);
-   })
-   .catch(function (error) {
-     console.log(error);
-   });      
-}
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4" style={{color: '#EB5160',}}>
+        <Typography component="h1" variant="h4" style={{ color: '#EB5160', }}>
           Cadastrar Aluno
         </Typography>
         <form className={classes.form} noValidate onSubmit={OnSubmit} >
@@ -137,22 +220,7 @@ export default function Cadastrar() {
                 onChange={handleNome}
               />
             </Grid>
-            
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                label="Codigo do Aluno"
-                type="number"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                id="end_aluno"
-                name="end_aluno"
-                onChange={handleEndAluno}                
-              />
-            </Grid>
+
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
@@ -167,6 +235,26 @@ export default function Cadastrar() {
                 name="end_num"
                 onChange={handleEndNum}
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                name="end_estado"
+                variant="outlined"
+                select
+                value={end_estado}
+                required
+                fullWidth
+                id="end_estado"
+                label="Estado"
+                autoFocus
+                onChange={handleEndEstado}
+              >
+              {currencies.map(option => (
+                <MenuItem key={option.end_estado} value={option.end_estado}>
+                  {option.end_estado}
+                </MenuItem>
+              ))}
+              </TextField>
             </Grid>
             <Grid item xs={12}>
               <TextField
@@ -218,18 +306,18 @@ export default function Cadastrar() {
             </Grid>
             <Grid item xs={12} sm={2}>
               <Avatar
-                variant={'circle'}          
+                variant={'circle'}
                 className={classes.input}
                 src={file}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <input 
-                type="file" 
+              <input
+                type="file"
                 name={'image'}
                 className={classes.avatar}
                 onChange={upload}
-              >                
+              >
               </input>
             </Grid>
           </Grid>
@@ -238,7 +326,7 @@ export default function Cadastrar() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}            
+            className={classes.submit}
           >
             Cadastrar
           </Button>
