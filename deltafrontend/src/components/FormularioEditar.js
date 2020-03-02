@@ -23,8 +23,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  avatar: {
-    backgroundColor: theme.palette.secondary.main,
+  avatar: {    
+    marginTop: theme.spacing(2),
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -37,10 +37,7 @@ const useStyles = makeStyles(theme => ({
 
   input: {
     marginTop: theme.spacing(2),
-  },
-  avatar: {
-    marginTop: theme.spacing(2),
-  },
+  },  
 }));
 
 const estados = [
@@ -128,23 +125,46 @@ export default function Editar() {
   const classes = useStyles();
 
   //Utilizando o parametro da minha url
-  const [idA,setidA] = useState(0)
   const {id} = useParams()
   
   //Status para endereço de aluno
+
+
+  /*async function fetchMyAPI() {
+    let response = await axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id}`, function(req, res, next){
+      return res.sendStatus(200);
+   })
+   .then(res => setCurrencies(res.data))
+   .catch(res => console.log('erro'))
+  }*/
+
+  async function getUser() {
+    try {
+      const response = await axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id}`);
+      setCurrencies(response.data)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() =>{
+    getUser();
+  },[])  
+
+  
+  
   const [currencies, setCurrencies] = useState([]);
 
 
-  useEffect(() =>{             
-    axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id}`, function(req, res, next){
-        return res.sendStatus(200);
-     })
-    .then(res => setCurrencies(res.data))
-    .catch(res => console.log('erro'))
-  },[])
+  function teste(currencies){
+    const nome = currencies.map(a => a.a_nome)[0];
+    return nome;
+  }
+  
 
   //States do Aluno
-  const [a_nome, setAnome] = useState('');
+  const [a_nome, setAnome] = useState(`${currencies.map(a => a.a_nome)[0]}`);
   const [image, setImage] = useState('');
   const [file, setFile] = useState('');
 
@@ -199,23 +219,26 @@ export default function Editar() {
     return setEndCep(e.target.value)
   }
 
+
   const OnSubmit = (e) => {
-    e.preventDefault();
-    const data = { a_nome, image, end_aluno, end_num, end_rua, end_bairro, end_cidade, end_cep }
+    e.preventDefault();          
+    const data = {id,a_nome, image,end_num, end_rua, end_bairro, end_cidade, end_cep }        
     const QS = qs.stringify(data)
-    const url = 'http://localhost/delta/deltabackend/index.php/api/addAluno'
+    console.log(QS)
+    
+    /*const url = 'http://localhost/delta/deltabackend/index.php/api/updateAluno'
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
     }
-    axios.post(url, QS, config)
+    axios.put(url, QS, config)
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
-      });
+      });*/
   }
   return (
     
@@ -232,11 +255,12 @@ export default function Editar() {
               <TextField
                 id="a_nome"
                 label="Nome"
-                defaultValue={aluno.a_nome}
+                defaultValue = {aluno.a_nome}                
                 helperText="Atualizar nome?"
                 variant="outlined"
                 name={"a_nome"}
                 fullWidth
+                onChange={handleNome}
               />
             </Grid>
 
@@ -247,6 +271,7 @@ export default function Editar() {
                 fullWidth
                 label="Numero da casa"
                 defaultValue={aluno.end_num}
+
                 helperText="Atualizar numero da residência?"
                 type="number"
                 id="end_num"
