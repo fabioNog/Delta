@@ -36,9 +36,6 @@ const StyledTableRow = withStyles(theme => ({
   },
 }))(TableRow);
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
 const useStyles = makeStyles({
   table: {
@@ -51,7 +48,7 @@ export default function CustomizedTables() {
 
   const [data, setData] = useState([]);
     useEffect(()=>{
-        axios.get('http://localhost/delta/deltabackend/index.php/api/aluno', function(req, res, next){
+        axios.get('http://localhost/delta/deltabackend/index.php/api/aluno', function(req, res, next){        
             return res.sendStatus(200);
          })
         .then(res => setData(res.data))
@@ -64,8 +61,8 @@ export default function CustomizedTables() {
         <TableHead>
           <TableRow>
             <StyledTableCell>Nome</StyledTableCell>
-            <StyledTableCell>Endereço</StyledTableCell>
-            <StyledTableCell>Foto</StyledTableCell>            
+            <StyledTableCell>Foto</StyledTableCell>
+            <StyledTableCell>Endereço</StyledTableCell>            
             <StyledTableCell>Atualizar</StyledTableCell>
             <StyledTableCell>Deletar</StyledTableCell>
           </TableRow>
@@ -77,18 +74,19 @@ export default function CustomizedTables() {
                 {aluno.a_nome}
               </StyledTableCell>
               <StyledTableCell>
+                <Avatar
+                  variant={'circle'}          
+                  className={classes.input}
+                  src={aluno.image}
+                />
+              </StyledTableCell>
+              <StyledTableCell>
                 <Link to={`/infoendereco/${aluno.id}`}>
                   <ListItemIcon>
                     {<House/>}                                
                   </ListItemIcon>
                 </Link>
               </StyledTableCell>
-              <StyledTableCell>
-                <Avatar
-                  variant={'circle'}          
-                  className={classes.input}
-                  src={aluno.image}
-                /></StyledTableCell>
               <StyledTableCell>
                 <Link to={`/atualizar/${aluno.id}`}>
                   <ListItemIcon >

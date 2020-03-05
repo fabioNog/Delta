@@ -47,7 +47,7 @@ export default function CustomizedTables(id) {
      })
     .then(res => setData(res.data))
     .catch(res => console.log('erro'))
-  },[])
+  })
 
   return (
     <TableContainer component={Paper}>

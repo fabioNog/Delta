@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import qs from 'qs'
 import Avatar from '@material-ui/core/Avatar';
+import {useHistory} from  'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -23,6 +24,7 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     backgroundColor: theme.palette.secondary.main,
+    marginTop: theme.spacing(2),
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -36,9 +38,7 @@ const useStyles = makeStyles(theme => ({
   input: {
     marginTop: theme.spacing(2),
   },
-  avatar: {
-    marginTop: theme.spacing(2),
-  },
+
 }));
 
 const currencies = [
@@ -178,11 +178,12 @@ export default function Cadastrar() {
     return setEndCep(e.target.value)
   }
 
+  const history = useHistory()
   const OnSubmit = (e) => {
     e.preventDefault();
-    const teste = { a_nome, image, end_num, end_rua, end_bairro, end_cidade, end_estado,end_cep }
-    const QS = qs.stringify(teste)
-    console.log(QS)
+    const data = { a_nome, image, end_num, end_rua, end_bairro, end_cidade, end_estado,end_cep }
+    const QS = qs.stringify(data)
+    console.log(QS)    
     const url = 'http://localhost/delta/deltabackend/index.php/api/addAluno'
     const config = {
       headers: {
@@ -192,6 +193,7 @@ export default function Cadastrar() {
     axios.post(url, QS, config)
       .then(function (response) {
         console.log(response);
+        history.goBack();
       })
       .catch(function (error) {
         console.log(error);

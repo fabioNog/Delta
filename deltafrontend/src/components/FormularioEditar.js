@@ -127,21 +127,21 @@ export default function Editar() {
   //Utilizando o parametro da minha url
   const {id} = useParams()
   
+  
   //Status para endereço de aluno
-
-
-  /*async function fetchMyAPI() {
-    let response = await axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id}`, function(req, res, next){
-      return res.sendStatus(200);
-   })
-   .then(res => setCurrencies(res.data))
-   .catch(res => console.log('erro'))
-  }*/
 
   async function getUser() {
     try {
       const response = await axios.get(`http://localhost/delta/deltabackend/index.php/api/alunobyid?id=${id}`);
       setCurrencies(response.data)
+      setAnome(response.data.map(a => a.a_nome))
+      setImage(response.data.map(a => a.image))
+      setEndNum(response.data.map(a => a.end_num))
+      setEndRua(response.data.map(a => a.end_rua))
+      setEndBairro(response.data.map(a => a.end_bairro))
+      setEndCidade(response.data.map(a => a.end_cidade))
+      setEstado(response.data.map(a => a.end_estado))
+      setEndCep(response.data.map(a => a.end_cep))
       
     } catch (error) {
       console.error(error);
@@ -152,24 +152,15 @@ export default function Editar() {
     getUser();
   },[])  
 
-  
-  
+    
   const [currencies, setCurrencies] = useState([]);
 
-
-  function teste(currencies){
-    const nome = currencies.map(a => a.a_nome)[0];
-    return nome;
-  }
-  
-
   //States do Aluno
-  const [a_nome, setAnome] = useState(`${currencies.map(a => a.a_nome)[0]}`);
+  const [a_nome, setAnome] = useState('');
   const [image, setImage] = useState('');
   const [file, setFile] = useState('');
 
   //States do Endereco
-  const [end_aluno, setEndAluno] = useState(0);
   const [end_num, setEndNum] = useState(0);
   const [end_rua, setEndRua] = useState('');
   const [end_bairro, setEndBairro] = useState('');
@@ -181,7 +172,6 @@ export default function Editar() {
   //Metodo upload Input
   const upload = e => {
     let files = e.target.files[0]
-    setFile(URL.createObjectURL(files))
     let reader = new FileReader();
     reader.readAsDataURL(files);
     reader.onload = (e) => {
@@ -191,10 +181,6 @@ export default function Editar() {
 
   const handleNome = (e) => {
     return setAnome(e.target.value)
-  }
-
-  const handleEndAluno = (e) => {
-    return setEndAluno(e.target.value)
   }
 
   const handleEndNum = (e) => {
@@ -222,11 +208,10 @@ export default function Editar() {
 
   const OnSubmit = (e) => {
     e.preventDefault();          
-    const data = {id,a_nome, image,end_num, end_rua, end_bairro, end_cidade, end_cep }        
+    const data = {id,a_nome, image,end_num, end_rua, end_bairro, end_cidade, end_estado,end_cep }            
     const QS = qs.stringify(data)
     console.log(QS)
-    
-    /*const url = 'http://localhost/delta/deltabackend/index.php/api/updateAluno'
+    const url = 'http://localhost/delta/deltabackend/index.php/api/updateAluno'
     const config = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -238,7 +223,7 @@ export default function Editar() {
       })
       .catch(function (error) {
         console.log(error);
-      });*/
+      });
   }
   return (
     
@@ -285,7 +270,7 @@ export default function Editar() {
                 select
                 variant="outlined"
                 label="Select"
-                value={end_estado =='' ? aluno.end_estado : end_estado}
+                value={end_estado ==='' ? aluno.end_estado : end_estado}
                 onChange={handleEndEstado}
                 helperText="Alterar o Estado?"
               >
@@ -357,7 +342,7 @@ export default function Editar() {
               <Avatar
                 variant={'circle'}
                 className={classes.input}
-                src={file==''?aluno.image : file}
+                src={image===''?aluno.image : image}
               />
             </Grid>
             <Grid item xs={12} sm={6}>

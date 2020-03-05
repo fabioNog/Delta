@@ -127,14 +127,29 @@ class Api extends REST_Controller{
     //API - update a aluno 
     function updateAluno_put(){
          
-         $name = $this->put('a_name');
-         $image = $this->put('image');
          $id = $this->put('id');
+         $name = $this->put('a_nome');
+         $image = $this->put('image');
+         $end_num = $this->put('end_num');
+         $end_rua = $this->put('end_rua');
+         $end_bairro = $this->put('end_bairro');
+         $end_cidade = $this->put('end_cidade');
+         $end_estado = $this->put('end_estado');
+         $end_cep = $this->put('end_cep');
 
-         if(!$name){
+
+         if(!$id){
             $this->response("Enter complete aluno information to save", 400);
          }else{
-            $result = $this->aluno_model->update($id, array("a_name"=>$name,"image"=>$image));
+            $result = $this->aluno_model->update($id, array(
+                "a_nome"=>$name,
+                "image"=>$image,
+                "end_num" => $end_num,
+                "end_rua"=>$end_rua,
+                "end_bairro"=>$end_bairro,
+                "end_cidade"=>$end_cidade,
+                "end_estado"=>$end_estado,
+                "end_cep"=>$end_cep));
             if($result === 0){
                 $this->response("aluno information coild not be saved. Try again.", 404);
             }else{
@@ -152,7 +167,7 @@ class Api extends REST_Controller{
         }         
         if($this->aluno_model->delete($id))
         {
-            $this->response("Success", 200);
+            $this->response("Success when delete $id", 200);
         } 
         else
         {
